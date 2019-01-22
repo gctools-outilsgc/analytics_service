@@ -32,7 +32,16 @@ services:
     volumes:
       - 'matomo_data:/bitnami'
     depends_on:
-     - mariadb
+      - mariadb
+  matomo-graphql:
+    image: 'index.docker.io/addyvan/matomo-graphql:latest'
+    ports:
+      - '4000:4000'
+    environment:
+      - MATOMO_TOKEN=&token_auth=1f7fddf485936d4690098f72b95a33de
+      - MATOMO_ENDPOINT=http://localhost:8000/
+    depends_on:
+      - matomo
 volumes:
   mariadb_data:
     driver: local
